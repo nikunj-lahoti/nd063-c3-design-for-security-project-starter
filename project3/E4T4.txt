@@ -1,0 +1,18 @@
+
+# What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+1) WAF can be added in front of the loadbalancer. https://owasp.org/www-project-top-ten/
+2) Using VPC private subnets.    
+3) Further fix the network at the Subnet level.
+4) AWS Shield can help mitigate DDOS attacks.
+
+# Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+> Even if we create VPC private endpoints for S3 bucket, attackers can still get access to the EC2 instance and try to exploit it.
+> We definitely still need the IAM permissions to guard against unauthorized access.
+
+# Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+> No. Existing files on the bucket will not get encrypted but any new files will all be encrypted at rest. 
+> We could create copies or upload the existing files again so that the new version is encrypted.
+
+# What would happen if the original cloud formation templates are applied to this environment.
+> Changes made outside of template can make the update or delete operation complicated. Drift detection can be used to make sure that the resources are in sync with their stack template. https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+When I tried to apply the templates, it seemed to have updated with S3 & app yml without any issue but there was no impact on the resources.

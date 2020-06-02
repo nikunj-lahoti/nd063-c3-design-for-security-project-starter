@@ -1,0 +1,11 @@
+
+
+# Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+1) Do not allow connections from all IP addresses to application host.
+2) Add a WAF in front of the loadbalancer and requests to this host should only come from the loadbalancer.
+3) Another option is defence by closed doors. If we can make sure that the instance is never required to be logged into (any other concerns like logging etc can be handled by managed services), then we can also block the ssh port even. 
+4) Remove password based authentication to this instance.
+
+# Neither instance should have had access to the secret recipes bucket, in the event that instance API credentials were compromised how could we have prevented access to sensitive data.
+1) API credentials should not be used, but the role based access control should be implemented.
+2) The S3 Access Role should explicity have a ReadOnlyPolicy and the resource should only be the Free Recipe Bucket.

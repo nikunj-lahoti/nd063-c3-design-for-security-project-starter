@@ -2,4 +2,9 @@
 GuardDuty figured out the target as well as the source of this breach and created a finding for both instances. 
 
 # Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
-GuardDuty is the service that runs across the entire AWS infrastruture, and continuously analyze VPC Flow logs, DNS logs, CloudTrail logs using Machine Learning and 3rd Party Intelligence Partners (Like Accenture, CrowdStrike, PagerDuty).
+Short answer: Mining for sketchy patterns in VPC Flow logs, DNS query logs & AWS CloudTrail logs (Eg. the requests per minute on the target will increase and the failure login attempts as well).
+Long answer: GuardDuty is the service that runs across the entire AWS infrastruture, and continuously analyze VPC Flow logs, DNS logs, CloudTrail logs using Machine Learning and 3rd Party Intelligence Partners (Like Accenture, CrowdStrike, PagerDuty).
+GuardDuty consumes data streams from a variety of 3rd party sources, malicious IP addresses, and bad domains.
+Also it looks for unusual CloudTrail activity and those EC2 instances that have been compromised.
+https://aws.amazon.com/blogs/aws/amazon-guardduty-continuous-security-monitoring-threat-detection/
+

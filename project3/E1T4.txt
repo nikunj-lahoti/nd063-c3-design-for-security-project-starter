@@ -1,0 +1,32 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+
+# Poor practice 1
+Issue: IAM policy, InstanceRolePolicy-C3, allows access to all S3 buckets and all actions. 
+Explanation: We should allow read only access to the Free Recipe S3 bucket alone. Implement least privilege access.
+The secret bucket should get access using a separate role so that any malicious user on our Web Sevice Instance is not able to access any other buckets with the current role.
+
+# Poor practice 2
+Issue: WebAppSG :: SecurityGroupIngress too open.
+Even though we only require communication on port 5000, there are other ports 22, 80 which are open. 
+Web service instance should only allow invocation from the load balancer. Any other access should not be allowed as intruders may try to hit the web server on these ports and exploit any vulnerabilities.
+
+
+# Other things to consider
+Web service Instance should only be allowed to access S3 on the basis of the role (and policy) associated with the instance. 
+Use of AWS Secret Key and Access key poses a huge security risk, if anyone else gets access to the instance then they will be able to pick up the the Credentials and try to attack other buckets and services as well (even from another instance). 
+IAM Role should be used for get temporary credentials on the basis of the Role.
+
+# Other things to consider
+There doesn't seem to be any access control/logging for free recipies at all. 
+We should make use of CloudWatch Alarms 
+Anyone on the internet, without even registering themselves on the platform can access the entire list of free recipies.
+This may be a business decision to allow free access, but we should at least log and monitor to determine abuse.
+This is really important as we pay AWS for network usage, storage etc. We should be watchful of what is going on in the system
+or will end up paying a huge sum of money.
+
+# Other things to consider
+This load balancer is not WAF enabled.
+No, DDOS protection by WAF (Akamai / Cloudflare). This is important to make sure that the system is highly available for our 
+legitimate users.
+

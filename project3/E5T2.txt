@@ -1,0 +1,36 @@
+# Identify tools that will allow you to do the following:
+
+##Scan infrastructure as code templates
+AWS supports Cloud Formation templates. Also, terraform commad & templates can be used.
+Cloud Conformity: https://www.cloudconformity.com/solutions/aws/cloudformation-template-scanner.html
+Prisma Cloud: https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin/prisma-cloud-devops-security/use-the-prisma-cloud-iac-scan-rest-api
+Dome9: https://aws.amazon.com/blogs/startups/dome9-on-static-code-analysis-of-your-infrastructure-as-code/
+Tenable.io: https://www.tenable.com/products/tenable-io/
+tfsec: https://github.com/liamg/tfsec
+
+### Example vulnerability
+Security Groups being too permissive.
+AWS Role related issues.
+Encryption related issues.
+
+##Scan AMI’s or containers for OS vulnerabilities
+AWS Inspector can be used for AMI vulnerabilities.
+Trivy: https://aws.amazon.com/blogs/containers/scanning-images-with-trivy-in-an-aws-codepipeline/
+Clair: https://aws.amazon.com/blogs/compute/scanning-docker-images-for-vulnerabilities-using-clair-amazon-ecs-ecr-aws-codepipeline/
+
+### Example vulnerability
+Root access. 
+Password based authentication.
+OS security patches missing.
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+AWS Inspector
+AWS Guard Duty
+AWS Config
+AWS Security Hub
+CloudWatch Alarm & CloudTrail
+
+### Example vulnerability
+AWS Root account access.
+Password Policies. 
+Permissive Security Groups.
